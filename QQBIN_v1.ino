@@ -1,7 +1,3 @@
-
-
-
-
 /* switch
  * 
  * Each time the input pin goes from LOW to HIGH (e.g. because of a push-button
