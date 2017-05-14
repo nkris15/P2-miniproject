@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Images/Gbb-disc.png</file>
+        <file>Images/Gbb-floppy.png</file>
+        <file>Images/Gbb-network.png</file>
+    </qresource>
+</RCC>
