@@ -1,6 +1,5 @@
 #include "serialportreader.h"
 
-
 QT_USE_NAMESPACE
 
 SerialPortReader::SerialPortReader(QSerialPort *serialPort, QObject *parent)

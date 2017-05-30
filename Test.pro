@@ -33,7 +33,7 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     adminwindow.h \
     gamewindow.h \
-    serialportreader.h
+    serialportreader.h \
 
 FORMS    += mainwindow.ui \
     adminwindow.ui \

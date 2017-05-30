@@ -14,6 +14,7 @@
 #include <QCoreApplication>
 #include <QFile>
 #include <QStringList>
+#include <QUuid>
 
 namespace Ui {
 class MainWindow;
@@ -24,23 +25,26 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    QString groupID_label;
+
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void setAdmin();
+    void setQueueNr(int);
 
 private slots:
     void on_timer_tick();
     void on_actionExit_triggered();
     void on_pushButton_queue_clicked();
+    void on_pushButton_groupID_clicked();
 
 private:
     Ui::MainWindow *ui;
     QTimer *timer = new QTimer(this);
     int timeStart;
+    class MainWindow *groupID;
 
     void start_queue();
     void stop_queue();
-
 
 };
 
