@@ -49,7 +49,6 @@ private:
 
     void start_queue();
     void stop_queue();
-
 };
 
 #endif // MAINWINDOW_H
