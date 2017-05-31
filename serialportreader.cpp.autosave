@@ -26,7 +26,7 @@ void SerialPortReader::handleReadyRead()
     if (!m_timer.isActive())
         m_timer.start(5000);
 
-
+    
 }
 
 void SerialPortReader::handleTimeout()

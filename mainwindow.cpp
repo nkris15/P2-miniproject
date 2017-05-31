@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     serialPort.setPortName(serialPortName);
 
     // Initialise the serialPortReader class
-    SerialPortReader serialPortReader(&serialPort);
+    SerialPortReader serialPortReader(&serialPort, this);
 
     // Set fixed size and disable the border arrows
     this->setFixedSize(630,430);

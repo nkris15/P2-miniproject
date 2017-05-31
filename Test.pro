@@ -27,17 +27,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     adminwindow.cpp \
-    gamewindow.cpp \
     serialportreader.cpp
 
 HEADERS  += mainwindow.h \
     adminwindow.h \
-    gamewindow.h \
     serialportreader.h \
 
 FORMS    += mainwindow.ui \
-    adminwindow.ui \
-    gamewindow.ui
+    adminwindow.ui
 
 RESOURCES += \
     main.qrc

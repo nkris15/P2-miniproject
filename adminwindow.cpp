@@ -56,6 +56,7 @@ void AdminWindow::updateQueue()
         ui->listWidget_queue->addItem(group->groupID_label); //
     }
 
+    // Update procent bar
     int procent = (queue_list.size()*100)/group_list.size();
     ui->pbar_queue->setValue(procent);
 }
