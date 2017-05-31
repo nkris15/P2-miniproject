@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Qt specific to "setup ui"
     ui->setupUi(this);
 
-    // Initialise the groupID (Does not change)
+    // Initialise the groupID (Pointer to this class)
     groupID = this;
 
     // Group label changes and defaults to a unique string
@@ -17,7 +17,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // Register the group to admin class
     ((AdminWindow*)(parent))->registerGroup(groupID);
 
-
     // Make sure the client is not in queue when they start the program
     stop_queue();
 
@@ -25,16 +24,15 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(on_timer_tick()));
 
     // Setup SerialPort communication
-    QSerialPort serialPort;
-    QString serialPortName = "/dev/ttyAMC0"; // Change this
+    serialPortName = "/dev/ttyACM0"; // Change this
     serialPort.setPortName(serialPortName);
 
-    // Initialise the serialPortReader class
-    SerialPortReader serialPortReader(&serialPort, this);
+    // Initialise the SerialPortReader class
+    serialPortReader = new SerialPortReader(&serialPort, this);
 
     // Set fixed size and disable the border arrows
-    this->setFixedSize(630,430);
-    this->statusBar()->setSizeGripEnabled(false);
+    setFixedSize(630,430);
+    statusBar()->setSizeGripEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -58,13 +56,21 @@ void MainWindow::stop_queue()
     ui->lcd_time->display("0:00");
     ui->lcd_qnum->display(0);
     ui->pushButton_queue->setText("Start Queue");
-
 }
 void MainWindow::setQueueNr(int queueNumber)
 {
     ui->lcd_qnum->display(queueNumber);
 }
+void MainWindow::tiltRegistered()
+{
+    // If the client is in queue they should stop the queue
+    if(timer->isActive()) {
+        stop_queue();
+    } else { // Else start queue
+        start_queue();
+    }
 
+}
 
 
 /* -------------------------------- Events -------------------------------- */

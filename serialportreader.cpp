@@ -13,6 +13,10 @@ SerialPortReader::SerialPortReader(QSerialPort *serialPort, QObject *parent)
     connect(&m_timer, &QTimer::timeout, this, &SerialPortReader::handleTimeout);
 
     m_timer.start(5000);
+
+    if (m_serialPort->open(QIODevice::ReadWrite)) {
+        m_standardOutput << QObject::tr("Connected to port %1").arg(m_serialPort->portName()) << endl;
+    }
 }
 
 SerialPortReader::~SerialPortReader()
@@ -23,9 +27,9 @@ void SerialPortReader::handleReadyRead()
 {
     m_readData.append(m_serialPort->readAll());
 
+
     if (!m_timer.isActive())
         m_timer.start(5000);
-
 
 }
 
@@ -36,9 +40,11 @@ void SerialPortReader::handleTimeout()
     } else {
         m_standardOutput << QObject::tr("Data successfully received from port %1").arg(m_serialPort->portName()) << endl;
         m_standardOutput << m_readData << endl;
+        if(m_readData.contains("Tilt")) {
+            ((MainWindow*)(parent()))->tiltRegistered();
+        }
+        m_readData.clear();
     }
-
-    // QCoreApplication::quit();
 }
 
 void SerialPortReader::handleError(QSerialPort::SerialPortError serialPortError)
